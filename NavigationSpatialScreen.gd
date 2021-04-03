@@ -19,6 +19,10 @@ var anchor_h:Spatial
 var anchor_v:Spatial
 var camera:Camera
 
+func _ready():
+	yield(get_tree().create_timer(0),"timeout")
+	three_finger_reset_info()
+
 func _input(event):
 	# 터치 시작과 종료
 	if event is InputEventScreenTouch or event is InputEventMouseButton:
@@ -51,7 +55,13 @@ func _input(event):
 			touches[index] = event.position
 
 func three_finger_reset_info():
-	printerr('three_finger_reset_info 설정되지 않음')
+	print_debug('NavigationSpatialScreen: three_finger_reset_info 설정되지 않음')
+	anchor_h.translation = Vector3(0,0,0)
+	anchor_h.rotation = Vector3(0,0,0)
+	anchor_v.translation = Vector3(0,0,0)
+	anchor_v.rotation = Vector3(0,0,0)
+	camera.translation = Vector3(0,0,0)
+	camera.rotation = Vector3(0,0,0)
 
 func reset_view_info():
 	three_finger_reset_info()
