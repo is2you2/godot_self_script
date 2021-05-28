@@ -53,9 +53,14 @@ func _input(event):
 			tmp['center'] = center
 			tmp['dist'] = dist
 			touches[index] = event.position
+	if event is InputEventMouseButton:
+		match(event.button_index):
+			4: # 휠 위로
+				camera.fov = clamp(camera.fov - (5)/2, 30, 95)
+			5: # 휠 아래로
+				camera.fov = clamp(camera.fov + (5)/2, 30, 95)
 
 func three_finger_reset_info():
-	print_debug('NavigationSpatialScreen: three_finger_reset_info 설정되지 않음')
 	anchor_h.translation = Vector3(0,0,0)
 	anchor_h.rotation = Vector3(0,0,0)
 	anchor_v.translation = Vector3(0,0,0)
